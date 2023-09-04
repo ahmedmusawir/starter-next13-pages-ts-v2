@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio"),
     require("@shrutibalasa/tailwind-grid-auto-fit"),
     require("daisyui"),
   ],

@@ -2,8 +2,15 @@ import { Fragment, ReactNode } from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  MagnifyingGlassIcon,
+  ShoppingBagIcon,
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
+import { useCart } from "@/contexts/CartContext";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +23,7 @@ interface NavLinkProps {
 
 const Navbar = () => {
   const router = useRouter();
+  const { setIsCartOpen, cartItems } = useCart();
 
   const NavLink = ({ href, children }: NavLinkProps) => {
     const isActive = router.pathname === href;
@@ -56,9 +64,10 @@ const Navbar = () => {
                       href="/"
                       className="rounded-md bg-gray-900 px-3 py-2 text-lg font-large text-white"
                     >
-                      CyberDining
+                      Next.js Starter v2
                     </Link>
                     <nav className="hidden sm:ml-6 sm:flex flex-grow justify-center items-center">
+                      <NavLink href="/shop">Shop</NavLink>
                       <NavLink href="/template">Template</NavLink>
                       <NavLink href="/demo">Demo</NavLink>
                     </nav>
@@ -69,11 +78,17 @@ const Navbar = () => {
                 <div className="flex items-center">
                   <button
                     type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={() => setIsCartOpen(true)}
                   >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    <ShoppingBagIcon
+                      className="h-6 w-6 flex-shrink-0 text-gray-200 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">Notifications</span>
+                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                      {cartItems.length}
+                    </div>
                   </button>
 
                   {/* Profile dropdown */}
