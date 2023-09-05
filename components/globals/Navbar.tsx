@@ -74,8 +74,26 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
+              {/* MOBILE CART BUTTON */}
+              <div className="sm:hidden mr-5">
+                <button
+                  type="button"
+                  className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  onClick={() => setIsCartOpen(true)}
+                >
+                  <ShoppingBagIcon
+                    className="h-6 w-6 flex-shrink-0 text-gray-200 group-hover:text-gray-500"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Notifications</span>
+                  <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                    {cartItems.length}
+                  </div>
+                </button>
+              </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex items-center">
+                  {/* DESKTOP CART BUTTON */}
                   <button
                     type="button"
                     className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -176,34 +194,30 @@ const Navbar = () => {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-              >
-                Dashboard
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Calendar
-              </Disclosure.Button>
+              <Link href="/shop">
+                <Disclosure.Button
+                  as="span"
+                  className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                >
+                  Shop
+                </Disclosure.Button>
+              </Link>
+              <Link href="/template">
+                <Disclosure.Button
+                  as="span"
+                  className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                >
+                  Template
+                </Disclosure.Button>
+              </Link>
+              <Link href="/demo">
+                <Disclosure.Button
+                  as="span"
+                  className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                >
+                  Demo
+                </Disclosure.Button>
+              </Link>
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">

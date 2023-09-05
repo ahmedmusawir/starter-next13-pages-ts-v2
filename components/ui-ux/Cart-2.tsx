@@ -1,11 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/contexts/CartContext";
+import { useProducts } from "@/contexts/ProductContext";
 import Link from "next/link";
 
 const Cart = () => {
   const {
+    cartItems,
     removeFromCart,
     setIsCartOpen,
     isCartOpen,
@@ -13,6 +15,20 @@ const Cart = () => {
     cartDetails,
     subtotal,
   } = useCart();
+  const { products } = useProducts();
+
+  console.log("Cart Details:", cartDetails);
+
+  // const subtotal = cartItems.reduce((acc, cartItem) => {
+  //   const product = products.find((p) => p.id === cartItem.id);
+
+  //   if (!product) {
+  //     console.warn(`Product with ID ${cartItem.id} not found!`);
+  //     return acc;
+  //   }
+
+  //   return acc + parseFloat(product.price.replace("$", "")) * cartItem.quantity;
+  // }, 0);
 
   const handleQuantityChange = (itemId: number, newQuantity: number) => {
     // Find the cart item and update its quantity
@@ -81,18 +97,22 @@ const Cart = () => {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {cartDetails.length === 0 && (
+                            {cartItems.length === 0 && (
                               <h3 className="mt-12">
                                 The Shopping Cart is empty!
                               </h3>
                             )}
-                            {cartDetails?.map((cartItem) => {
+                            {cartItems?.map((cartItem) => {
+                              const product = products.find(
+                                (p) => p.id === cartItem.id
+                              );
+
                               return (
                                 <li key={cartItem.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
-                                      src={cartItem?.productDetails?.imageSrc}
-                                      alt={cartItem?.productDetails?.imageAlt}
+                                      src={product?.imageSrc}
+                                      alt={product?.imageAlt}
                                       className="h-full w-full object-cover object-center"
                                     />
                                   </div>
@@ -100,12 +120,8 @@ const Cart = () => {
                                   <div className="ml-4 flex flex-1 flex-col">
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
-                                          {cartItem?.productDetails?.name}
-                                        </h3>
-                                        <p className="ml-4">
-                                          {cartItem?.productDetails?.price}
-                                        </p>
+                                        <h3>{product?.name}</h3>
+                                        <p className="ml-4">{product?.price}</p>
                                       </div>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
@@ -168,17 +184,10 @@ const Cart = () => {
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
                       </p>
-                      <div
-                        className="mt-6"
-                        onClick={() => setIsCartOpen(false)}
-                      >
+                      <div className="mt-6">
                         <Link
-                          href={cartDetails.length > 0 ? "/checkout" : "#"}
-                          className={`flex items-center justify-center rounded-md px-6 py-3 text-base font-medium shadow-sm ${
-                            cartDetails.length > 0
-                              ? "bg-indigo-600 text-white hover:bg-indigo-700 border border-transparent"
-                              : "bg-gray-300 text-gray-500 border border-gray-400 cursor-not-allowed"
-                          }`}
+                          href="/checkout"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
                         </Link>
