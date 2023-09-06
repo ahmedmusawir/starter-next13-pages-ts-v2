@@ -3,8 +3,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Cart = () => {
+  const router = useRouter();
+
   const {
     removeFromCart,
     setIsCartOpen,
@@ -25,7 +28,18 @@ const Cart = () => {
 
   const handleRemoveCartItem = (id: number) => {
     removeFromCart(id);
-    setIsCartOpen(true);
+    // setIsCartOpen(true);
+
+    // Check if the cart is empty after removal
+    if (cartDetails.length === 1) {
+      // Since we're checking before the state update, 1 means it's the last item
+      router.push("/shop"); // Redirect to the shop page
+    }
+  };
+
+  const goBackToShop = () => {
+    router.push("/shop"); // Redirect to the shop page
+    setIsCartOpen(false);
   };
 
   return (
@@ -189,7 +203,7 @@ const Cart = () => {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setIsCartOpen(false)}
+                            onClick={() => goBackToShop()}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
