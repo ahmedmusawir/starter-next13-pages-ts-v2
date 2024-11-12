@@ -52,10 +52,10 @@ const Hero = () => {
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
                   <h1 className="text-4xl font-bold tracking-tight  text-indigo-600 sm:text-6xl">
-                    Welcome to Next.js Starter v2
+                    Welcome to Next.js Starter v4
                   </h1>
                   <h3 className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-                    THIS IS DEPLOYMENT V3
+                    THIS IS DEPLOYMENT V4
                   </h3>
                   {/* <div className="mt-10 flex items-center gap-x-6"> */}
                   <div className="mt-10 items-center gap-x-6">
