@@ -54,9 +54,9 @@ const Hero = () => {
                   <h1 className="text-4xl font-bold tracking-tight  text-indigo-600 sm:text-6xl">
                     Welcome to Next.js Starter v2
                   </h1>
-                  <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-                    Cupidatat minim id magna ipsum sint dolor qui. Sunt sit
-                  </p>
+                  <h3 className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
+                    THIS IS DEPLOYMENT V1
+                  </h3>
                   {/* <div className="mt-10 flex items-center gap-x-6"> */}
                   <div className="mt-10 items-center gap-x-6">
                     <div className="relative mt-2 rounded-md shadow-sm flex-grow">
